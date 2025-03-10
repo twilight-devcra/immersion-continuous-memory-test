@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://b5fgr2eewwobe"]
+
+[node name="MainLevel" type="Node2D"]
+
+[node name="ShapeSpawner" type="Node2D" parent="."]

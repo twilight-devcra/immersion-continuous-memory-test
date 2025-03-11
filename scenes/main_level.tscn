@@ -1,5 +1,10 @@
-[gd_scene format=3 uid="uid://b5fgr2eewwobe"]
+[gd_scene load_steps=2 format=3 uid="uid://b5fgr2eewwobe"]
+
+[ext_resource type="Script" uid="uid://bd1dcp556b67n" path="res://scripts/shape_spawner.gd" id="1_v3uhd"]
 
 [node name="MainLevel" type="Node2D"]
 
 [node name="ShapeSpawner" type="Node2D" parent="."]
+script = ExtResource("1_v3uhd")
+spawn_origin = Vector2(60, 60)
+spawn_size = Vector2(500, 500)

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcgnodt06lyey"]
+
+[ext_resource type="Script" uid="uid://bjp02t7gvji66" path="res://scripts/single_round.gd" id="1_810ji"]
+[ext_resource type="Script" uid="uid://5afye0ntgief" path="res://scripts/previewer.gd" id="2_vg3a1"]
+
+[node name="SingleRound" type="Node2D"]
+script = ExtResource("1_810ji")
+
+[node name="Previewer" type="Node2D" parent="."]
+script = ExtResource("2_vg3a1")
+
+[node name="TimerBar" type="Node2D" parent="."]
+position = Vector2(0, 600)
+
+[node name="QuestionDisplay" type="Node2D" parent="."]
+position = Vector2(0, 300)

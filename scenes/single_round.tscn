@@ -1,14 +1,40 @@
-[gd_scene load_steps=2 format=3 uid="uid://dcgnodt06lyey"]
+[gd_scene load_steps=7 format=3 uid="uid://dcgnodt06lyey"]
 
 [ext_resource type="Script" uid="uid://bjp02t7gvji66" path="res://scripts/single_round.gd" id="1_810ji"]
+[ext_resource type="Script" uid="uid://5afye0ntgief" path="res://scripts/previewer.gd" id="2_vg3a1"]
+[ext_resource type="Script" uid="uid://uhe5pbn8cuv3" path="res://scripts/question_display.gd" id="3_d5xus"]
+[ext_resource type="Script" uid="uid://di70cjw3eyufh" path="res://scripts/timer_bar.gd" id="3_gdu7r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gdu7r"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iju0s"]
+bg_color = Color(1, 1, 0, 1)
 
 [node name="SingleRound" type="Node2D"]
 script = ExtResource("1_810ji")
+difficulty = 3
 
 [node name="Previewer" type="Node2D" parent="."]
+script = ExtResource("2_vg3a1")
 
 [node name="TimerBar" type="Node2D" parent="."]
-position = Vector2(0, 600)
+position = Vector2(0, 550)
+script = ExtResource("3_gdu7r")
+
+[node name="ProgressBar" type="ProgressBar" parent="TimerBar"]
+offset_top = 28.0
+offset_right = 800.0
+offset_bottom = 51.0
+theme_override_styles/background = SubResource("StyleBoxFlat_gdu7r")
+theme_override_styles/fill = SubResource("StyleBoxFlat_iju0s")
+show_percentage = false
+
+[node name="Timer" type="Timer" parent="TimerBar"]
 
 [node name="QuestionDisplay" type="Node2D" parent="."]
-position = Vector2(0, 300)
+position = Vector2(264, 320)
+script = ExtResource("3_d5xus")
+
+[connection signal="answers_generated" from="." to="Previewer" method="_on_single_round_answers_generated"]
+[connection signal="timeout" from="TimerBar/Timer" to="TimerBar" method="_on_timer_timeout"]

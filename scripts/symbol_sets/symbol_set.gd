@@ -3,17 +3,47 @@
 extends Resource
 class_name SymbolSet
 
-var correct: Array
-var incorrect: Array
+var symbols: Array[Symbol]
+var correct: Array[Symbol]
+var incorrect: Array[Symbol]
+var questions: Array[QuestionData]
+var level: int
 
-func make_answers() -> void:
-	self.correct.shuffle()
+func make(question_amount:int=10) -> void:
+	self.correct = self.make_correct()
+	self.incorrect = self.make_incorrect()
+	self.questions = self.make_questions(question_amount)
 	
-func correct_symbol() -> void:
-	pass
+func make_correct() -> Array[Symbol]:
+	assert(false, 'implement make_correct()')
+	return []
 	
-func incorrect_symbol() -> void:
-	pass
+func make_incorrect() -> Array[Symbol]:
+	assert(false, 'implement make_incorrect()')
+	return []
+	
+func make_questions(amount:int) -> Array[QuestionData]:
+	var questions = []
+	for x in range(amount):
+		var appeared = randi() % 2 == 0
+		
+		var symbol
+		if appeared:
+			symbol = self.correct_symbol()
+		else:
+			symbol = self.incorrect_symbol()
+		
+		questions.append(QuestionData.new(symbol, appeared))
+	return questions
+	
+func correct_symbols() -> Array[Symbol]:
+	return self.correct
 
-func _init() -> void:
-	pass
+func correct_symbol() -> Symbol:
+	return self.correct.pick_random()
+	
+func incorrect_symbol() -> Symbol:
+	return self.incorrect.pick_random()
+
+func _init(level:int=1) -> void:
+	self.level = level

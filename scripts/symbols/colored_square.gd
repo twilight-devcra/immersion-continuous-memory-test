@@ -13,13 +13,15 @@ func _draw() -> void:
 	
 
 func _init(size:float = 50.0, color:Color = Color.RED) -> void:
+	super._init()
 	self.size = size
-	#self.position = Vector2(size / 2.0, size / 2.0)
+	
 	self.color = color
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super._ready()
+	self.position += Vector2(size / 2.0, size / 2.0)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

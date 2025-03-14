@@ -27,7 +27,7 @@ func make_incorrect() -> Array[Symbol]:
 func _init(level:int=1) -> void:
 	self.squares = []
 	for color in colors:
-		var square:ColoredSquare = colored_square_factory.new(50.0, color)
+		var square:ColoredSquare = colored_square_factory.new(100.0, color)
 		self.squares.append(square)
 	
 	super._init(level)

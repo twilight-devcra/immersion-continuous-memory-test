@@ -1,31 +1,33 @@
 extends Node2D
 
-@export var answers_position: Vector2
 @export var margin: float
+@export var symbol_width: float
+
+func __symbol_position(index, total) -> Vector2:
+	var position = -(self.symbol_width * total + self.margin * (total - 1)) / 2.0 + self.symbol_width / 2.0
+	
+	for x in range(index):
+		position += self.symbol_width + self.margin
+	return Vector2(position, 0)
 
 func display(answers:Array[Symbol]) -> void:
-	var next_symbol_pos = Vector2(answers_position)
+	$ReadyLabel.visible = true
 	for i in range(len(answers)):
 		var symbol:Symbol = answers[i]
-		symbol.position = next_symbol_pos
+		symbol.anchor = self.__symbol_position(i, len(answers))
 		self.add_child(symbol)
-		next_symbol_pos += Vector2(symbol.area.x + self.margin, 0)
 			
 func vanish() -> void:
 	print('vanish')
+	$ReadyLabel.visible = false
 	for child in self.get_children():
 		self.remove_child(child)
 		
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	$ReadyLabel.visible = false
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-
-
-func _on_single_round_answers_generated(answers: Array) -> void:
-	print('_on_single_round_answers_generated')
-	self.display(answers)

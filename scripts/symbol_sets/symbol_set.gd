@@ -23,7 +23,7 @@ func make_incorrect() -> Array[Symbol]:
 	return []
 	
 func make_questions(amount:int) -> Array[QuestionData]:
-	var questions = []
+	var questions:Array[QuestionData] = []
 	for x in range(amount):
 		var appeared = randi() % 2 == 0
 		

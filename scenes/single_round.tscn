@@ -1,9 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://dcgnodt06lyey"]
+[gd_scene load_steps=13 format=3 uid="uid://dcgnodt06lyey"]
 
 [ext_resource type="Script" uid="uid://bjp02t7gvji66" path="res://scripts/single_round.gd" id="1_810ji"]
 [ext_resource type="Script" uid="uid://5afye0ntgief" path="res://scripts/previewer.gd" id="2_vg3a1"]
 [ext_resource type="Script" uid="uid://uhe5pbn8cuv3" path="res://scripts/question_display.gd" id="3_d5xus"]
 [ext_resource type="Script" uid="uid://di70cjw3eyufh" path="res://scripts/timer_bar.gd" id="3_gdu7r"]
+[ext_resource type="Script" uid="uid://cxmhdb2fgx266" path="res://scripts/question_result.gd" id="5_iju0s"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_gdu7r"]
+font_size = 28
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gdu7r"]
 bg_color = Color(0, 0, 0, 1)
@@ -11,12 +15,41 @@ bg_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iju0s"]
 bg_color = Color(1, 1, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_iju0s"]
+font_size = 28
+
+[sub_resource type="LabelSettings" id="LabelSettings_cgs1j"]
+font_size = 36
+font_color = Color(1, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_xl0p3"]
+font_size = 36
+font_color = Color(0, 1, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_oq6tl"]
+font_size = 100
+
 [node name="SingleRound" type="Node2D"]
 script = ExtResource("1_810ji")
 difficulty = 3
+answer_time = 5.0
+answer_timer_color = Color(0, 0.796078, 0, 1)
+question_time = 3.0
+question_timer_color = Color(0.760784, 0, 0, 1)
 
 [node name="Previewer" type="Node2D" parent="."]
+position = Vector2(400, 140)
 script = ExtResource("2_vg3a1")
+symbol_width = 150.0
+
+[node name="ReadyLabel" type="Label" parent="Previewer"]
+offset_left = -400.0
+offset_top = -140.0
+offset_right = 400.0
+offset_bottom = -100.0
+text = "모두 외우세요!"
+label_settings = SubResource("LabelSettings_gdu7r")
+horizontal_alignment = 1
 
 [node name="TimerBar" type="Node2D" parent="."]
 position = Vector2(0, 550)
@@ -31,10 +64,50 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_iju0s")
 show_percentage = false
 
 [node name="Timer" type="Timer" parent="TimerBar"]
+one_shot = true
 
 [node name="QuestionDisplay" type="Node2D" parent="."]
-position = Vector2(264, 320)
+position = Vector2(400, 300)
 script = ExtResource("3_d5xus")
 
-[connection signal="answers_generated" from="." to="Previewer" method="_on_single_round_answers_generated"]
+[node name="Label" type="Label" parent="QuestionDisplay"]
+offset_left = -400.0
+offset_top = -200.0
+offset_right = 400.0
+offset_bottom = -160.0
+text = "기억했던 도형인가요?"
+label_settings = SubResource("LabelSettings_iju0s")
+horizontal_alignment = 1
+
+[node name="LabelNo" type="Label" parent="QuestionDisplay"]
+offset_left = -400.0
+offset_top = -164.0
+offset_right = 400.0
+offset_bottom = -113.0
+text = "[아니오]"
+label_settings = SubResource("LabelSettings_cgs1j")
+horizontal_alignment = 1
+
+[node name="LabelYes" type="Label" parent="QuestionDisplay"]
+offset_left = -400.0
+offset_top = -164.0
+offset_right = 400.0
+offset_bottom = -113.0
+text = "[예]"
+label_settings = SubResource("LabelSettings_xl0p3")
+horizontal_alignment = 1
+
+[node name="QuestionResult" type="Node2D" parent="."]
+position = Vector2(0, 200)
+script = ExtResource("5_iju0s")
+
+[node name="Label" type="Label" parent="QuestionResult"]
+offset_right = 800.0
+offset_bottom = 23.0
+text = "정답"
+label_settings = SubResource("LabelSettings_oq6tl")
+horizontal_alignment = 1
+
+[connection signal="guess_updated" from="." to="QuestionDisplay" method="_on_single_round_guess_updated"]
+[connection signal="timeout" from="TimerBar/Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="TimerBar/Timer" to="TimerBar" method="_on_timer_timeout"]

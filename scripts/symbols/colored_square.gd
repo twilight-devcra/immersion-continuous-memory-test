@@ -21,7 +21,7 @@ func _init(size:float = 50.0, color:Color = Color.RED) -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super._ready()
-	self.position += Vector2(size / 2.0, size / 2.0)
+	self.position -= Vector2(size / 2.0, size / 2.0)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

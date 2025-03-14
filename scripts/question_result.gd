@@ -1,18 +1,18 @@
 extends Node2D
-class_name Symbol
 
-var anchor: Vector2
+func vanish() -> void:
+	$Label.visible = false
 
-func _draw() -> void:
-	assert(false, "Called the base Symbol's _draw() function") 
-
-func _init() -> void:
-	pass
+func display(is_correct:bool) -> void:
+	if is_correct:
+		$Label.text = "정답"
+	else:
+		$Label.text = "오답"
+	$Label.visible = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# init the position to the given anchor.
-	self.position = self.anchor
+	$Label.visible = false
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

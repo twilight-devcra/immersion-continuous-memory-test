@@ -4,7 +4,7 @@ class_name Symbol
 var anchor: Vector2
 
 func _draw() -> void:
-	assert(false, "Called the base Symbol's _draw() function") 
+	self.position = self.anchor
 
 func _init() -> void:
 	pass
@@ -12,7 +12,8 @@ func _init() -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# init the position to the given anchor.
-	self.position = self.anchor
+	#self.position = self.anchor
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

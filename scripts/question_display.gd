@@ -8,6 +8,7 @@ func display(symbol: Symbol) -> void:
 	self.display_labels()
 	self.cur_symbol = symbol
 	self.cur_symbol.anchor = Vector2(0,0)
+	print(self.cur_symbol.anchor)
 	self.add_child(cur_symbol)
 	
 func vanish() -> void:

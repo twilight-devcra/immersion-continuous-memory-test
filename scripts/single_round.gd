@@ -39,7 +39,7 @@ func run_state() -> void:
 		RoundState.SHOW_QUESTION_RESULT:
 			self.process_question_results()
 			await self.__delay(0.8)
-			self.advance_state()
+			await self.advance_state()
 			self.run_state()
 			return
 
@@ -99,5 +99,5 @@ func _process(delta: float) -> void:
 
 func _on_timer_timeout() -> void:
 	print('advance_state')
-	self.advance_state()
+	await self.advance_state()
 	self.run_state()

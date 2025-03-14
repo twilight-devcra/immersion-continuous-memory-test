@@ -5,6 +5,9 @@ var size:float
 var color:Color
 
 func _draw() -> void:
+	super._draw()
+	self.position -= Vector2(size / 2.0, size / 2.0)
+	
 	# draw the square.
 	self.draw_rect(Rect2(0, 0, self.size, self.size), self.color)
 	
@@ -21,7 +24,7 @@ func _init(size:float = 50.0, color:Color = Color.RED) -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super._ready()
-	self.position -= Vector2(size / 2.0, size / 2.0)
+	#self.position -= Vector2(size / 2.0, size / 2.0)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckk5v2uv5pelj"]
+
+[ext_resource type="Script" uid="uid://cpgx7h68rouvy" path="res://scripts/single_result.gd" id="1_d7utn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nr3b7"]
+font_size = 80
+font_color = Color(0, 1, 1, 1)
+outline_size = 5
+
+[node name="SingleResult" type="Node2D"]
+script = ExtResource("1_d7utn")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "X"
+label_settings = SubResource("LabelSettings_nr3b7")

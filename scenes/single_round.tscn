@@ -108,6 +108,8 @@ text = "정답"
 label_settings = SubResource("LabelSettings_oq6tl")
 horizontal_alignment = 1
 
+[node name="ResultHistory" type="Node2D" parent="."]
+
 [connection signal="guess_updated" from="." to="QuestionDisplay" method="_on_single_round_guess_updated"]
 [connection signal="timeout" from="TimerBar/Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="TimerBar/Timer" to="TimerBar" method="_on_timer_timeout"]

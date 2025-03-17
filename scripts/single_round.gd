@@ -51,7 +51,7 @@ func run_state() -> void:
 			self.run_state()
 			return
 		RoundState.SHOW_ROUND_RESULT:
-			self.round_finished.emit(self.result_data_factory.new(self.symbol_type, self.difficulty, self.symbol_set.questions, self.results))
+			self.round_finished.emit(self.result_data_factory.new(self.symbol_type, self.difficulty, self.symbol_set, self.results))
 
 # cleanup previous state and advance state.
 func advance_state() -> void:

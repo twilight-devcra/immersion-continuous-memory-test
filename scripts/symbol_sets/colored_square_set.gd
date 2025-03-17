@@ -13,8 +13,11 @@ const colors: Array = [
 ]
 var squares: Array[Symbol]
 
+func max_level() -> int:
+	return 3
+
 func answer_count(level:int) -> int:
-	return min(level, 3)
+	return min(level, self.max_level())
 
 func make_correct() -> Array[Symbol]:
 	self.squares.shuffle()

@@ -9,6 +9,9 @@ var incorrect: Array[Symbol]
 var questions: Array[QuestionData]
 var level: int
 
+func max_level() -> int:
+	return 100
+
 func make(question_amount:int=10) -> void:
 	self.correct = self.make_correct()
 	self.incorrect = self.make_incorrect()

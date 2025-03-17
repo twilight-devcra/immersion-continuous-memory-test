@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://dcgnodt06lyey"]
+[gd_scene load_steps=14 format=3 uid="uid://dcgnodt06lyey"]
 
 [ext_resource type="Script" uid="uid://bjp02t7gvji66" path="res://scripts/single_round.gd" id="1_810ji"]
 [ext_resource type="Script" uid="uid://5afye0ntgief" path="res://scripts/previewer.gd" id="2_vg3a1"]
 [ext_resource type="Script" uid="uid://uhe5pbn8cuv3" path="res://scripts/question_display.gd" id="3_d5xus"]
 [ext_resource type="Script" uid="uid://di70cjw3eyufh" path="res://scripts/timer_bar.gd" id="3_gdu7r"]
 [ext_resource type="Script" uid="uid://cxmhdb2fgx266" path="res://scripts/question_result.gd" id="5_iju0s"]
+[ext_resource type="Script" uid="uid://q402ppc2w0fk" path="res://scripts/result_history.gd" id="6_cgs1j"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_gdu7r"]
 font_size = 28
@@ -27,11 +28,12 @@ font_size = 36
 font_color = Color(0, 1, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_oq6tl"]
-font_size = 100
+font_size = 80
 
 [node name="SingleRound" type="Node2D"]
 script = ExtResource("1_810ji")
 difficulty = 3
+question_num = 1
 answer_time = 5.0
 answer_timer_color = Color(0, 0.796078, 0, 1)
 question_time = 3.0
@@ -104,11 +106,15 @@ script = ExtResource("5_iju0s")
 [node name="Label" type="Label" parent="QuestionResult"]
 offset_right = 800.0
 offset_bottom = 23.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
 text = "정답"
 label_settings = SubResource("LabelSettings_oq6tl")
 horizontal_alignment = 1
 
 [node name="ResultHistory" type="Node2D" parent="."]
+position = Vector2(0, 532)
+script = ExtResource("6_cgs1j")
+label_width = 40.0
 
 [connection signal="guess_updated" from="." to="QuestionDisplay" method="_on_single_round_guess_updated"]
 [connection signal="timeout" from="TimerBar/Timer" to="." method="_on_timer_timeout"]

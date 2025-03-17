@@ -1,17 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://ckk5v2uv5pelj"]
+[gd_scene load_steps=2 format=3 uid="uid://ckk5v2uv5pelj"]
 
-[ext_resource type="Script" uid="uid://cpgx7h68rouvy" path="res://scripts/single_result.gd" id="1_d7utn"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_nr3b7"]
-font_size = 80
-font_color = Color(0, 1, 1, 1)
-outline_size = 5
+[ext_resource type="Script" uid="uid://bcjkohv5hao30" path="res://scripts/single_result.gd" id="1_d7utn"]
 
 [node name="SingleResult" type="Node2D"]
 script = ExtResource("1_d7utn")
 
 [node name="Label" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 1.0
+offset_top = -12.0
+offset_right = 51.0
+offset_bottom = 43.0
+theme_override_font_sizes/font_size = 40
 text = "X"
-label_settings = SubResource("LabelSettings_nr3b7")
+horizontal_alignment = 1
+vertical_alignment = 1

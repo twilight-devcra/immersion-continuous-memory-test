@@ -13,10 +13,13 @@ enum RoundState {
 }
 
 signal guess_updated
+signal round_finished
 	
+var result_data_factory = preload("res://scripts/round_result_data.gd")
 
-@export var difficulty: int = 0
-@export var type: SymbolTypes = SymbolTypes.COLORED_SQUARES
+@export var difficulty: int = 1
+@export var symbol_type: SymbolTypes = SymbolTypes.COLORED_SQUARES
+@export var question_num: int = 10
 @export var answer_time: float
 @export var answer_timer_color: Color
 @export var question_time: float
@@ -26,6 +29,11 @@ var symbol_set: SymbolSet
 var results: Array[bool]
 var state: RoundState
 var current_guess: bool # the user's guess of whether the current question is among the answer symbols.
+
+func init(symbol_type:SymbolTypes, difficulty:int, question_num:int=10):
+	self.symbol_type = symbol_type
+	self.difficulty = difficulty
+	self.question_num = question_num
 
 func __delay(amount:float) -> void:
 	await self.get_tree().create_timer(amount).timeout
@@ -42,6 +50,8 @@ func run_state() -> void:
 			await self.advance_state()
 			self.run_state()
 			return
+		RoundState.SHOW_ROUND_RESULT:
+			self.round_finished.emit(self.result_data_factory.new(self.symbol_type, self.difficulty, self.symbol_set.questions, self.results))
 
 # cleanup previous state and advance state.
 func advance_state() -> void:
@@ -73,6 +83,7 @@ func show_next_question() -> void:
 func process_question_results() -> void:
 	var is_correct = self.current_guess == self.symbol_set.questions[len(self.results)].is_answer
 	self.results.append(is_correct)
+	$ResultHistory.add_result(is_correct)
 	$QuestionResult.display(is_correct)
 			
 func show_answer() -> void:
@@ -80,8 +91,11 @@ func show_answer() -> void:
 	$TimerBar.start_timer(self.answer_time, self.answer_timer_color)
 
 func generate_round_data() -> void:
-	self.symbol_set = ColoredSquareSet.new(self.difficulty)
-	self.symbol_set.make()
+	match self.symbol_type:
+		SymbolTypes.COLORED_SQUARES:
+			self.symbol_set = ColoredSquareSet.new(self.difficulty)
+	
+	self.symbol_set.make(self.question_num)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

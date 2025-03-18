@@ -1,0 +1,124 @@
+[gd_scene load_steps=2 format=3 uid="uid://drtpqw8o7hw7u"]
+
+[ext_resource type="Script" uid="uid://dlcqxo43yrs0w" path="res://scripts/startup_screen.gd" id="1_jamkg"]
+
+[node name="StartupScreen" type="Node2D"]
+script = ExtResource("1_jamkg")
+
+[node name="TaskDescriptionLabel" type="RichTextLabel" parent="."]
+offset_left = 17.0
+offset_top = 14.0
+offset_right = 784.0
+offset_bottom = 300.0
+bbcode_enabled = true
+text = "[font_size=60]연속 암기 테스트[/font_size]
+
+처음에 화면에 나오는 기호(들)을 외웁니다.
+
+이후에 다른 기호가 하나씩 화면에 나타납니다.
+이 기호가 [color=yellow]처음에 외웠던 기호(들) 중에 있었는 지[/color] 맞춰야 합니다.
+
+외웠던 기호라면, [color=yellow]스페이스바[/color]를 누릅니다.
+그렇지 않다면, 아무것도 누르지 않습니다."
+horizontal_alignment = 1
+
+[node name="SymbolTypeSelect" type="OptionButton" parent="."]
+offset_left = 176.0
+offset_top = 407.0
+offset_right = 293.0
+offset_bottom = 438.0
+selected = 0
+item_count = 1
+popup/item_0/text = "색칠된 네모"
+popup/item_0/id = 0
+
+[node name="RoundNumSelect" type="OptionButton" parent="."]
+offset_left = 336.0
+offset_top = 407.0
+offset_right = 387.0
+offset_bottom = 438.0
+selected = 4
+item_count = 10
+popup/item_0/text = "1"
+popup/item_0/id = 1
+popup/item_1/text = "2"
+popup/item_1/id = 2
+popup/item_2/text = "3"
+popup/item_2/id = 3
+popup/item_3/text = "4"
+popup/item_3/id = 4
+popup/item_4/text = "5"
+popup/item_4/id = 5
+popup/item_5/text = "6"
+popup/item_5/id = 6
+popup/item_6/text = "7"
+popup/item_6/id = 7
+popup/item_7/text = "8"
+popup/item_7/id = 8
+popup/item_8/text = "9"
+popup/item_8/id = 9
+popup/item_9/text = "10"
+popup/item_9/id = 10
+
+[node name="ProblemNumSelect" type="OptionButton" parent="."]
+offset_left = 436.0
+offset_top = 407.0
+offset_right = 487.0
+offset_bottom = 438.0
+selected = 1
+item_count = 3
+popup/item_0/text = "1"
+popup/item_0/id = 0
+popup/item_1/text = "5"
+popup/item_1/id = 1
+popup/item_2/text = "10"
+popup/item_2/id = 2
+
+[node name="DifficultyCurveSelect" type="OptionButton" parent="."]
+offset_left = 536.0
+offset_top = 407.0
+offset_right = 637.0
+offset_bottom = 438.0
+selected = 0
+item_count = 2
+popup/item_0/text = "점점 증가"
+popup/item_0/id = 0
+popup/item_1/text = "자동 조정"
+popup/item_1/id = 1
+
+[node name="Label" type="Label" parent="."]
+offset_left = 176.0
+offset_top = 377.0
+offset_right = 245.0
+offset_bottom = 400.0
+text = "기호 종류"
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 336.0
+offset_top = 377.0
+offset_right = 405.0
+offset_bottom = 400.0
+text = "라운드 수"
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 436.0
+offset_top = 377.0
+offset_right = 489.0
+offset_bottom = 400.0
+text = "문제 수"
+
+[node name="Label4" type="Label" parent="."]
+offset_left = 536.0
+offset_top = 377.0
+offset_right = 621.0
+offset_bottom = 400.0
+text = "난이도 조정"
+
+[node name="ReadyButton" type="Button" parent="."]
+offset_left = 275.0
+offset_top = 470.0
+offset_right = 525.0
+offset_bottom = 522.0
+text = "시작!"
+
+[connection signal="pressed" from="ReadyButton" to="." method="_on_ready_button_pressed"]

@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="immersion-continuous-memory-test"
+run/main_scene="uid://drtpqw8o7hw7u"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 

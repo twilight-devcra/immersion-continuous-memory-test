@@ -33,7 +33,6 @@ font_size = 80
 [node name="SingleRound" type="Node2D"]
 script = ExtResource("1_810ji")
 difficulty = 3
-symbol_type = null
 question_num = 1
 answer_time = 5.0
 answer_timer_color = Color(0, 0.796078, 0, 1)

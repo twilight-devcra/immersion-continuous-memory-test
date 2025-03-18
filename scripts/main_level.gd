@@ -22,6 +22,12 @@ func new_round() -> void:
 func delete_current_round() -> void:
 	self.remove_child(self.current_round)
 	self.current_round.queue_free()
+	
+func init(symbol_type:SymbolMeta.Types, rounds:int, problems:int, difficulty_curve:RoundManager.DifficultyCurve) -> void:
+	self.symbol_type = symbol_type
+	self.rounds = rounds
+	self.round_problem_count = problems
+	self.difficulty_curve = difficulty_curve
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

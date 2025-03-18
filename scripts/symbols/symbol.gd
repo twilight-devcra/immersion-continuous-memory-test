@@ -3,6 +3,10 @@ class_name Symbol
 
 var anchor: Vector2
 
+# a string describing this specific symbol (for result printing)
+func describe() -> String:
+	return 'base symbol'
+
 func _draw() -> void:
 	self.position = self.anchor
 

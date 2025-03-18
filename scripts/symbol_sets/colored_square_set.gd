@@ -3,18 +3,22 @@ class_name ColoredSquareSet
 
 var colored_square_factory = preload("res://scripts/symbols/colored_square.gd")
 const colors: Array = [
-	Color.CRIMSON,
-	Color.FUCHSIA,
-	Color.MEDIUM_BLUE,
-	Color.GOLD,
-	Color.LIME_GREEN,
-	Color.DARK_ORANGE,
-	Color.WEB_GRAY
+	Color('e6194b'),
+	Color('f58231'),
+	Color('ffe119'),
+	Color('3cb44b'),
+	Color('42d4f4'),
+	Color('4363d8'),
+	Color('f032e6'),
+	Color('a9a9a9'),
+	Color('fabed4'),
+	Color('aaffc3'),
+	Color('dcbeff')
 ]
 var squares: Array[Symbol]
 
 func max_level() -> int:
-	return 3
+	return 5
 
 func answer_count(level:int) -> int:
 	return min(level, self.max_level())

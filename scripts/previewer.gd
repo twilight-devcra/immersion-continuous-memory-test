@@ -18,7 +18,6 @@ func display(answers:Array[Symbol]) -> void:
 		self.add_child(symbol)
 			
 func vanish() -> void:
-	print('vanish')
 	$ReadyLabel.visible = false
 	for child in self.get_children():
 		self.remove_child(child)

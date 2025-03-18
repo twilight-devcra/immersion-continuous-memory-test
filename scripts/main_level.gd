@@ -4,7 +4,12 @@ var single_round = preload("res://scenes/single_round.tscn")
 var current_round:SingleRound
 var manager:RoundManager
 
+@export var rounds:int = 5
 @export var round_problem_count:int = 10
+@export var symbol_type:SymbolMeta.Types = SymbolMeta.Types.COLORED_SQUARES
+@export var difficulty_curve:RoundManager.DifficultyCurve = RoundManager.DifficultyCurve.INCREMENTING
+
+signal session_finished
 
 func new_round() -> void:
 	var round_params = manager.make_next_round_params()
@@ -20,7 +25,7 @@ func delete_current_round() -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	self.manager = RoundManager.new(SingleRound.SymbolTypes.COLORED_SQUARES, RoundManager.DifficultyCurve.INCREMENTING)
+	self.manager = RoundManager.new(self.symbol_type, self.difficulty_curve)
 	self.new_round()
 
 
@@ -29,4 +34,13 @@ func _process(delta: float) -> void:
 	pass
 	
 func _on_round_finished(result:RoundResultData):
-	print(result.results)
+	self.manager.save_round_results(result)
+	self.delete_current_round()
+	
+	if self.manager.round_count() >= self.rounds:
+		# end session.
+		self.manager.export()
+		self.session_finished.emit()
+		self.get_tree().quit()
+	else:
+		self.new_round()

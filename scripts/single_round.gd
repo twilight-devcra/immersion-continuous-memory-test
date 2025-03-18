@@ -1,10 +1,6 @@
 extends Node2D
 class_name SingleRound
 
-enum SymbolTypes {
-	COLORED_SQUARES
-}
-
 enum RoundState {
 	SHOW_ANSWER,
 	SHOW_QUESTION,
@@ -18,7 +14,7 @@ signal round_finished
 var result_data_factory = preload("res://scripts/round_result_data.gd")
 
 @export var difficulty: int = 1
-@export var symbol_type: SymbolTypes = SymbolTypes.COLORED_SQUARES
+@export var symbol_type: SymbolMeta.Types = SymbolMeta.Types.COLORED_SQUARES
 @export var question_num: int = 10
 @export var answer_time: float
 @export var answer_timer_color: Color
@@ -30,7 +26,7 @@ var results: Array[bool]
 var state: RoundState
 var current_guess: bool # the user's guess of whether the current question is among the answer symbols.
 
-func init(symbol_type:SymbolTypes, difficulty:int, question_num:int=10):
+func init(symbol_type:SymbolMeta.Types, difficulty:int, question_num:int=10):
 	self.symbol_type = symbol_type
 	self.difficulty = difficulty
 	self.question_num = question_num
@@ -92,7 +88,7 @@ func show_answer() -> void:
 
 func generate_round_data() -> void:
 	match self.symbol_type:
-		SymbolTypes.COLORED_SQUARES:
+		SymbolMeta.Types.COLORED_SQUARES:
 			self.symbol_set = ColoredSquareSet.new(self.difficulty)
 	
 	self.symbol_set.make(self.question_num)
@@ -112,6 +108,5 @@ func _process(delta: float) -> void:
 
 
 func _on_timer_timeout() -> void:
-	print('advance_state')
 	await self.advance_state()
 	self.run_state()

@@ -4,6 +4,9 @@ class_name ColoredSquare
 var size:float
 var color:Color
 
+func describe() -> String:
+	return '(%s, %s, %s)' % [self.color.r8, self.color.g8, self.color.b8]
+
 func _draw() -> void:
 	super._draw()
 	self.position -= Vector2(size / 2.0, size / 2.0)

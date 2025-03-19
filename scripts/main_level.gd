@@ -1,6 +1,7 @@
 extends Node2D
 
 var single_round = preload("res://scenes/single_round.tscn")
+var final_result_scene = preload("res://scenes/final_result.tscn")
 var current_round:SingleRound
 var manager:RoundManager
 
@@ -8,8 +9,8 @@ var manager:RoundManager
 @export var round_problem_count:int = 10
 @export var symbol_type:SymbolMeta.Types = SymbolMeta.Types.COLORED_SQUARES
 @export var difficulty_curve:RoundManager.DifficultyCurve = RoundManager.DifficultyCurve.INCREMENTING
-
-signal session_finished
+@export var score_increment:int = 1000
+var score:int = 0
 
 func new_round() -> void:
 	var round_params = manager.make_next_round_params()
@@ -17,6 +18,7 @@ func new_round() -> void:
 	self.current_round = single_round.instantiate()
 	self.current_round.init(round_params[0], round_params[1], self.round_problem_count)
 	self.current_round.round_finished.connect(self._on_round_finished)
+	self.current_round.question_processed.connect(self._on_question_processed)
 	self.add_child(current_round)
 	
 func delete_current_round() -> void:
@@ -39,14 +41,23 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 	
-func _on_round_finished(result:RoundResultData):
+func _on_round_finished(result:RoundResultData) -> void:
 	self.manager.save_round_results(result)
 	self.delete_current_round()
 	
 	if self.manager.round_count() >= self.rounds:
 		# end session.
 		self.manager.export()
-		self.session_finished.emit()
-		self.get_tree().quit()
+		
+		var final_result = final_result_scene.instantiate()
+		final_result.init(self.score)
+		
+		self.get_tree().root.add_child(final_result)
+		self.get_node('/root/MainLevel').queue_free()
 	else:
 		self.new_round()
+
+func _on_question_processed(difficulty:int, is_correct:bool) -> void:
+	if is_correct:
+		self.score += difficulty * self.score_increment
+		$ScoreContainer.set_score(self.score)

@@ -1,7 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://b5fgr2eewwobe"]
+[gd_scene load_steps=4 format=3 uid="uid://b5fgr2eewwobe"]
 
 [ext_resource type="Script" uid="uid://deb0cvj5c4rxk" path="res://scripts/main_level.gd" id="1_v3uhd"]
+[ext_resource type="Script" uid="uid://inyg1756sex7" path="res://scripts/score_container.gd" id="2_6we3w"]
+[ext_resource type="LabelSettings" uid="uid://cdofuo0cmsviu" path="res://labels/score.tres" id="2_ufxs0"]
 
 [node name="MainLevel" type="Node2D"]
 script = ExtResource("1_v3uhd")
 rounds = 8
+
+[node name="ScoreContainer" type="Node2D" parent="."]
+position = Vector2(590, 535)
+script = ExtResource("2_6we3w")
+
+[node name="Header" type="Label" parent="ScoreContainer"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "점수:"
+label_settings = ExtResource("2_ufxs0")
+
+[node name="Score" type="Label" parent="ScoreContainer"]
+offset_left = 77.0
+offset_right = 197.0
+offset_bottom = 42.0
+text = "0"
+label_settings = ExtResource("2_ufxs0")

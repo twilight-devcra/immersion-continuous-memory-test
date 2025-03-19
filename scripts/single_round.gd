@@ -10,6 +10,7 @@ enum RoundState {
 
 signal guess_updated
 signal round_finished
+signal question_processed
 	
 var result_data_factory = preload("res://scripts/round_result_data.gd")
 
@@ -81,6 +82,7 @@ func process_question_results() -> void:
 	self.results.append(is_correct)
 	$ResultHistory.add_result(is_correct)
 	$QuestionResult.display(is_correct)
+	self.question_processed.emit(self.difficulty, is_correct)
 			
 func show_answer() -> void:
 	$Previewer.display(self.symbol_set.correct_symbols())

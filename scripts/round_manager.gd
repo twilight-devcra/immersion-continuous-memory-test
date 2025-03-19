@@ -36,7 +36,16 @@ func next_round_difficulty() -> int:
 			
 			return min(self.current_difficulty + 1, self.round_results[-1].round_set.max_level())
 		DifficultyCurve.AUTO:
-			return 1
+			if len(self.round_results) == 0:
+				return 1
+				
+			var accuracy = self.round_results[-1].correct_ratio()
+			if accuracy >= 0.9:
+				return min(self.current_difficulty + 1, self.round_results[-1].round_set.max_level())
+			elif accuracy < 0.7:
+				return max(1, self.current_difficulty - 1)
+			else:
+				return self.current_difficulty
 		_:
 			return 1
 	

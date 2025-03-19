@@ -6,6 +6,8 @@ func symbol_type(id:int) -> SymbolMeta.Types:
 	match id:
 		0:
 			return SymbolMeta.Types.COLORED_SQUARES
+		1:
+			return SymbolMeta.Types.COLORED_SHAPES
 		_:
 			return SymbolMeta.Types.COLORED_SQUARES
 			

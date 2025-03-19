@@ -28,9 +28,11 @@ offset_top = 407.0
 offset_right = 293.0
 offset_bottom = 438.0
 selected = 0
-item_count = 1
+item_count = 2
 popup/item_0/text = "색칠된 네모"
 popup/item_0/id = 0
+popup/item_1/text = "색칠된 도형"
+popup/item_1/id = 1
 
 [node name="RoundNumSelect" type="OptionButton" parent="."]
 offset_left = 336.0

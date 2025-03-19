@@ -21,6 +21,9 @@ func export() -> Dictionary:
 		})
 		
 	return data
+	
+func correct_ratio() -> float:
+	return float(len(results.filter(func (result): return result))) / len(results)
 
 func _init(symbol:SymbolMeta.Types, difficulty:int, round_set:SymbolSet, results: Array[bool]) -> void:
 	self.symbol_type = symbol

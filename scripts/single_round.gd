@@ -14,7 +14,7 @@ signal round_finished
 var result_data_factory = preload("res://scripts/round_result_data.gd")
 
 @export var difficulty: int = 1
-@export var symbol_type: SymbolMeta.Types = SymbolMeta.Types.COLORED_SQUARES
+@export var symbol_type: SymbolMeta.Types
 @export var question_num: int = 10
 @export var answer_time: float
 @export var answer_timer_color: Color
@@ -90,6 +90,8 @@ func generate_round_data() -> void:
 	match self.symbol_type:
 		SymbolMeta.Types.COLORED_SQUARES:
 			self.symbol_set = ColoredSquareSet.new(self.difficulty)
+		SymbolMeta.Types.COLORED_SHAPES:
+			self.symbol_set = ColoredShapeSet.new(self.difficulty)
 	
 	self.symbol_set.make(self.question_num)
 

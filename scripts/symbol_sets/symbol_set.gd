@@ -3,7 +3,6 @@
 extends Resource
 class_name SymbolSet
 
-var symbols: Array[Symbol]
 var correct: Array[Symbol]
 var incorrect: Array[Symbol]
 var questions: Array[QuestionData]

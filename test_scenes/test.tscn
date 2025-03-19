@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3vvxl5fkec3j"]
+
+[ext_resource type="Script" uid="uid://c75c5yaiojm6f" path="res://scripts/symbols/colored_shape.gd" id="1_d4cb7"]
+
+[node name="Test" type="Node2D"]
+position = Vector2(400, 300)
+
+[node name="ColoredShape" type="Node2D" parent="."]
+script = ExtResource("1_d4cb7")
+shape = 3
+
+[node name="ColoredShape2" type="Node2D" parent="."]
+script = ExtResource("1_d4cb7")
+anchor = Vector2(70, 0)
+
+[node name="ColoredShape3" type="Node2D" parent="."]
+script = ExtResource("1_d4cb7")
+shape = 1
+anchor = Vector2(-70, 0)
+
+[node name="ColoredShape4" type="Node2D" parent="."]
+script = ExtResource("1_d4cb7")
+shape = 2
+anchor = Vector2(140, 0)
+
+[node name="ColoredShape5" type="Node2D" parent="."]
+script = ExtResource("1_d4cb7")
+shape = 4
+anchor = Vector2(-140, 0)

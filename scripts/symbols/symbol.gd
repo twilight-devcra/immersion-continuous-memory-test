@@ -1,7 +1,7 @@
 extends Node2D
 class_name Symbol
 
-var anchor: Vector2
+@export var anchor: Vector2
 
 # a string describing this specific symbol (for result printing)
 func describe() -> String:

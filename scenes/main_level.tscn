@@ -6,7 +6,8 @@
 
 [node name="MainLevel" type="Node2D"]
 script = ExtResource("1_v3uhd")
-rounds = 8
+rounds = 1
+difficulty_curve = 2
 
 [node name="ScoreContainer" type="Node2D" parent="."]
 position = Vector2(590, 535)

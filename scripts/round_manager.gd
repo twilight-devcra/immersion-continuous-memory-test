@@ -3,7 +3,8 @@ class_name RoundManager
 
 enum DifficultyCurve {
 	INCREMENTING,
-	AUTO
+	AUTO,
+	AUTO_EARLY
 }
 
 static func diff_curve_name(val:DifficultyCurve) -> String:
@@ -12,6 +13,8 @@ static func diff_curve_name(val:DifficultyCurve) -> String:
 			return 'incrementing'
 		DifficultyCurve.AUTO:
 			return 'auto'
+		DifficultyCurve.AUTO_EARLY:
+			return 'auto_early_stop'
 		_:
 			return 'undefined'
 
@@ -28,14 +31,17 @@ func save_round_results(data:RoundResultData) -> void:
 func round_count() -> int:
 	return len(self.round_results)
 	
-func next_round_difficulty() -> int:
+func next_round_difficulty(force_increment:int=0) -> int:
+	if force_increment != 0:
+		return max(1, min(self.current_difficulty + force_increment, self.round_results[-1].round_set.max_leve()))
+	
 	match self.difficulty_curve:
 		DifficultyCurve.INCREMENTING:
 			if len(self.round_results) == 0:
 				return 1
 			
 			return min(self.current_difficulty + 1, self.round_results[-1].round_set.max_level())
-		DifficultyCurve.AUTO:
+		DifficultyCurve.AUTO_EARLY, DifficultyCurve.AUTO:
 			if len(self.round_results) == 0:
 				return 1
 				

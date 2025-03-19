@@ -26,6 +26,7 @@ var symbol_set: SymbolSet
 var results: Array[bool]
 var state: RoundState
 var current_guess: bool # the user's guess of whether the current question is among the answer symbols.
+var stop_flag: bool = false # set to true to stop state processing.
 
 func init(symbol_type:SymbolMeta.Types, difficulty:int, question_num:int=10):
 	self.symbol_type = symbol_type
@@ -36,6 +37,10 @@ func __delay(amount:float) -> void:
 	await self.get_tree().create_timer(amount).timeout
 	
 func run_state() -> void:
+	if self.stop_flag:
+		self.end_round()
+		return
+	
 	match self.state:
 		RoundState.SHOW_ANSWER:
 			self.show_answer()
@@ -48,7 +53,7 @@ func run_state() -> void:
 			self.run_state()
 			return
 		RoundState.SHOW_ROUND_RESULT:
-			self.round_finished.emit(self.result_data_factory.new(self.symbol_type, self.difficulty, self.symbol_set, self.results))
+			self.end_round()
 
 # cleanup previous state and advance state.
 func advance_state() -> void:
@@ -71,6 +76,9 @@ func advance_state() -> void:
 			else:
 				self.state = RoundState.SHOW_QUESTION
 			return
+
+func end_round() -> void:
+	self.round_finished.emit(self.result_data_factory.new(self.symbol_type, self.difficulty, self.symbol_set, self.results))
 			
 func show_next_question() -> void:
 	self.current_guess = false

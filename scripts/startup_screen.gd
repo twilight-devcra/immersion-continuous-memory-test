@@ -31,6 +31,8 @@ func difficulty_curve(id:int) -> RoundManager.DifficultyCurve:
 			return RoundManager.DifficultyCurve.INCREMENTING
 		1:
 			return RoundManager.DifficultyCurve.AUTO
+		2:
+			return RoundManager.DifficultyCurve.AUTO_EARLY
 		_:
 			return RoundManager.DifficultyCurve.INCREMENTING
 

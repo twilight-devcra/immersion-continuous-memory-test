@@ -18,12 +18,14 @@ var correct_streak:int = 0
 var incorrect_streak:int = 0
 var total_problem_count:int
 var current_problem_count:int = 0
+var difficulty_change:int = 0
 
 func new_round() -> void:
+	var round_params = manager.make_next_round_params(self.difficulty_change)
+	
 	self.correct_streak = 0
 	self.incorrect_streak = 0
-	
-	var round_params = manager.make_next_round_params()
+	self.difficulty_change = 0
 	
 	self.current_round = single_round.instantiate()
 	self.current_round.init(round_params[0], round_params[1], min(self.round_problem_count, self.total_problem_count - self.current_problem_count))
@@ -81,7 +83,12 @@ func _on_question_processed(difficulty:int, is_correct:bool) -> void:
 		self.correct_streak = 0
 		self.incorrect_streak += 1
 		
-	if self.difficulty_curve == RoundManager.DifficultyCurve.AUTO_EARLY and \
-	(self.correct_streak >= self.correct_streak_trigger or self.incorrect_streak >= self.incorrect_streak_trigger):
-		# prematurly end this round.
-		self.current_round.stop_flag = true
+	if self.difficulty_curve == RoundManager.DifficultyCurve.AUTO_EARLY:
+		if self.correct_streak >= self.correct_streak_trigger:
+			self.difficulty_change = 1
+		elif self.incorrect_streak >= self.incorrect_streak_trigger:
+			self.difficulty_change = -1
+			
+		if self.difficulty_change != 0:
+			# prematurly end this round.
+			self.current_round.stop_flag = true

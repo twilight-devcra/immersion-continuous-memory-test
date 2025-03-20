@@ -24,9 +24,9 @@ horizontal_alignment = 1
 
 [node name="SymbolTypeSelect" type="OptionButton" parent="."]
 offset_left = 176.0
-offset_top = 407.0
+offset_top = 346.0
 offset_right = 293.0
-offset_bottom = 438.0
+offset_bottom = 377.0
 selected = 1
 item_count = 2
 popup/item_0/text = "색칠된 네모"
@@ -36,9 +36,9 @@ popup/item_1/id = 1
 
 [node name="RoundNumSelect" type="OptionButton" parent="."]
 offset_left = 336.0
-offset_top = 407.0
+offset_top = 346.0
 offset_right = 387.0
-offset_bottom = 438.0
+offset_bottom = 377.0
 selected = 4
 item_count = 10
 popup/item_0/text = "1"
@@ -64,9 +64,9 @@ popup/item_9/id = 10
 
 [node name="ProblemNumSelect" type="OptionButton" parent="."]
 offset_left = 436.0
-offset_top = 407.0
+offset_top = 346.0
 offset_right = 487.0
-offset_bottom = 438.0
+offset_bottom = 377.0
 selected = 2
 item_count = 3
 popup/item_0/text = "1"
@@ -78,9 +78,9 @@ popup/item_2/id = 2
 
 [node name="DifficultyCurveSelect" type="OptionButton" parent="."]
 offset_left = 536.0
-offset_top = 407.0
-offset_right = 637.0
-offset_bottom = 438.0
+offset_top = 346.0
+offset_right = 673.0
+offset_bottom = 377.0
 selected = 2
 item_count = 3
 popup/item_0/text = "점점 증가"
@@ -92,30 +92,30 @@ popup/item_2/id = 2
 
 [node name="Label" type="Label" parent="."]
 offset_left = 176.0
-offset_top = 377.0
+offset_top = 316.0
 offset_right = 245.0
-offset_bottom = 400.0
+offset_bottom = 339.0
 text = "기호 종류"
 
 [node name="Label2" type="Label" parent="."]
 offset_left = 336.0
-offset_top = 377.0
+offset_top = 316.0
 offset_right = 405.0
-offset_bottom = 400.0
+offset_bottom = 339.0
 text = "라운드 수"
 
 [node name="Label3" type="Label" parent="."]
 offset_left = 436.0
-offset_top = 377.0
+offset_top = 316.0
 offset_right = 489.0
-offset_bottom = 400.0
+offset_bottom = 339.0
 text = "문제 수"
 
 [node name="Label4" type="Label" parent="."]
 offset_left = 536.0
-offset_top = 377.0
+offset_top = 316.0
 offset_right = 621.0
-offset_bottom = 400.0
+offset_bottom = 339.0
 text = "난이도 조정"
 
 [node name="ReadyButton" type="Button" parent="."]

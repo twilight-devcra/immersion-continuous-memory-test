@@ -31,6 +31,11 @@ func save_round_results(data:RoundResultData) -> void:
 func round_count() -> int:
 	return len(self.round_results)
 	
+func can_raise_difficulty() -> bool:
+	if len(self.round_results) == 0:
+		return true
+	return self.round_results[-1].difficulty < self.round_results[-1].round_set.max_level()
+	
 func next_round_difficulty(force_increment:int=0) -> int:
 	if force_increment != 0:
 		return max(1, min(self.current_difficulty + force_increment, self.round_results[-1].round_set.max_level()))

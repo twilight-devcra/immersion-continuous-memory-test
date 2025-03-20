@@ -24,7 +24,7 @@ var symbols: Array[Symbol]
 var size:float = 100.0
 
 func max_level() -> int:
-	return 10
+	return 4
 
 func answer_count(level:int) -> int:
 	return min(level, self.max_level())

@@ -18,7 +18,7 @@ const colors: Array = [
 var squares: Array[Symbol]
 
 func max_level() -> int:
-	return 5
+	return 4
 
 func answer_count(level:int) -> int:
 	return min(level, self.max_level())

@@ -84,7 +84,7 @@ func _on_question_processed(difficulty:int, is_correct:bool) -> void:
 		self.incorrect_streak += 1
 		
 	if self.difficulty_curve == RoundManager.DifficultyCurve.AUTO_EARLY:
-		if self.correct_streak >= self.correct_streak_trigger:
+		if self.correct_streak >= self.correct_streak_trigger and self.manager.can_raise_difficulty():
 			self.difficulty_change = 1
 		elif self.incorrect_streak >= self.incorrect_streak_trigger:
 			self.difficulty_change = -1

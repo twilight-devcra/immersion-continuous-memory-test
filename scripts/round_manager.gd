@@ -20,6 +20,7 @@ static func diff_curve_name(val:DifficultyCurve) -> String:
 
 var symbol_type:SymbolMeta.Types
 var difficulty_curve:DifficultyCurve
+var manual_max_difficulty:int
 
 var current_difficulty: int
 
@@ -34,25 +35,30 @@ func round_count() -> int:
 func can_raise_difficulty() -> bool:
 	if len(self.round_results) == 0:
 		return true
-	return self.round_results[-1].difficulty < self.round_results[-1].round_set.max_level()
+	return self.round_results[-1].difficulty < self.max_difficulty()
+	
+func max_difficulty() -> int:
+	if len(self.round_results) == 0:
+		return self.manual_max_difficulty
+	return min(self.round_results[-1].round_set.max_level(), self.manual_max_difficulty)
 	
 func next_round_difficulty(force_increment:int=0) -> int:
 	if force_increment != 0:
-		return max(1, min(self.current_difficulty + force_increment, self.round_results[-1].round_set.max_level()))
+		return max(1, min(self.current_difficulty + force_increment, self.max_difficulty()))
 	
 	match self.difficulty_curve:
 		DifficultyCurve.INCREMENTING:
 			if len(self.round_results) == 0:
 				return 1
 			
-			return min(self.current_difficulty + 1, self.round_results[-1].round_set.max_level())
+			return min(self.current_difficulty + 1, self.max_difficulty())
 		DifficultyCurve.AUTO_EARLY, DifficultyCurve.AUTO:
 			if len(self.round_results) == 0:
 				return 1
 				
 			var accuracy = self.round_results[-1].correct_ratio()
 			if accuracy >= 0.9:
-				return min(self.current_difficulty + 1, self.round_results[-1].round_set.max_level())
+				return min(self.current_difficulty + 1, self.max_difficulty())
 			elif accuracy < 0.7:
 				return max(1, self.current_difficulty - 1)
 			else:
@@ -79,7 +85,8 @@ func export() -> void:
 	file.store_string(JSON.stringify(export_data, '\t'))
 	
 			
-func _init(symbol_type:SymbolMeta.Types, curve:DifficultyCurve) -> void:
+func _init(symbol_type:SymbolMeta.Types, curve:DifficultyCurve, max_difficulty:int) -> void:
 	self.symbol_type = symbol_type
 	self.difficulty_curve = curve
+	self.manual_max_difficulty = max_difficulty
 	self.current_difficulty = 1

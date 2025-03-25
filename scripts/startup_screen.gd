@@ -11,20 +11,6 @@ func symbol_type(id:int) -> SymbolMeta.Types:
 		_:
 			return SymbolMeta.Types.COLORED_SQUARES
 			
-func round_num(id:int) -> int:
-	return id
-	
-func problem_num(id:int) -> int:
-	match id:
-		0:
-			return 1
-		1: 
-			return 5
-		2:
-			return 10
-		_:
-			return 1
-			
 func difficulty_curve(id:int) -> RoundManager.DifficultyCurve:
 	match id:
 		0:
@@ -50,9 +36,10 @@ func _on_ready_button_pressed() -> void:
 	var main_level = main_level_scene.instantiate()
 	main_level.init(
 		self.symbol_type($SymbolTypeSelect.get_selected_id()),
-		self.round_num($RoundNumSelect.get_selected_id()),
-		self.problem_num($ProblemNumSelect.get_selected_id()),
-		self.difficulty_curve($DifficultyCurveSelect.get_selected_id())
+		$RoundNum.value,
+		$ProblemNum.value,
+		self.difficulty_curve($DifficultyCurveSelect.get_selected_id()),
+		$MaxLevel.value
 	)
 	
 	self.get_tree().root.add_child(main_level)

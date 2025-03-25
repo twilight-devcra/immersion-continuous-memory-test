@@ -9,6 +9,7 @@ var manager:RoundManager
 @export var round_problem_count:int = 10
 @export var symbol_type:SymbolMeta.Types = SymbolMeta.Types.COLORED_SQUARES
 @export var difficulty_curve:RoundManager.DifficultyCurve = RoundManager.DifficultyCurve.INCREMENTING
+@export var max_difficulty:int = 7
 @export var score_increment:int = 1000
 @export var correct_streak_trigger:int = 5
 @export var incorrect_streak_trigger:int = 2
@@ -37,16 +38,17 @@ func delete_current_round() -> void:
 	self.remove_child(self.current_round)
 	self.current_round.queue_free()
 	
-func init(symbol_type:SymbolMeta.Types, rounds:int, problems:int, difficulty_curve:RoundManager.DifficultyCurve) -> void:
+func init(symbol_type:SymbolMeta.Types, rounds:int, problems:int, difficulty_curve:RoundManager.DifficultyCurve, max_difficulty:int) -> void:
 	self.symbol_type = symbol_type
 	self.rounds = rounds
 	self.round_problem_count = problems
 	self.difficulty_curve = difficulty_curve
+	self.max_difficulty = max_difficulty
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	self.total_problem_count = self.rounds * self.round_problem_count
-	self.manager = RoundManager.new(self.symbol_type, self.difficulty_curve)
+	self.manager = RoundManager.new(self.symbol_type, self.difficulty_curve, self.max_difficulty)
 	self.new_round()
 
 

@@ -27,3 +27,11 @@ offset_bottom = 411.0
 text = "0"
 label_settings = SubResource("LabelSettings_eunen")
 horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 800.0
+offset_bottom = 600.0
+
+[connection signal="gui_input" from="Control" to="." method="_on_control_gui_input"]

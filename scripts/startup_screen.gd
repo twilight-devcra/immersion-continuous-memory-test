@@ -21,18 +21,8 @@ func difficulty_curve(id:int) -> RoundManager.DifficultyCurve:
 			return RoundManager.DifficultyCurve.AUTO_EARLY
 		_:
 			return RoundManager.DifficultyCurve.INCREMENTING
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
-func _on_ready_button_pressed() -> void:
+			
+func start_main_level() -> void:
 	var main_level = main_level_scene.instantiate()
 	main_level.init(
 		self.symbol_type($SymbolTypeSelect.get_selected_id()),
@@ -44,3 +34,17 @@ func _on_ready_button_pressed() -> void:
 	
 	self.get_tree().root.add_child(main_level)
 	self.get_node('/root/StartupScreen').queue_free()
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	if(Input.is_action_just_pressed("start")):
+		self.start_main_level()
+
+
+func _on_ready_button_pressed() -> void:
+	self.start_main_level()
